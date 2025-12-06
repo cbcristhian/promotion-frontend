@@ -22,7 +22,25 @@
       <li><a class="btn btn-ghost" routerLinkActive="text-secondary">History</a></li>
     </ul>
   </div>
-  <div class="navbar-end">
-    <a class="btn">TODO LOGOUT</a>
+  <div class="navbar-end gap-4">
+    @if ( authService.authStatus() === 'authenticated' ) {
+      <button class="btn btn-ghost">
+        {{ authService.user()?.name }}
+      </button>
+      <span class="text-secondary">
+        {{ authService.user()?.role  }}
+      </span>
+      <button class="btn btn-sm btn-error" (click)="authService.logout()">
+        Salir
+      </button>
+      }
+      <!--  -->
+      @else if ( authService.authStatus() === 'not-authenticated' ) {
+      <a routerLink="/auth/login" class="btn btn-secondary">Login</a>
+      }
+      <!--  -->
+      @else {
+      <a class="btn btn-ghost">...</a>
+      }
   </div>
 </div>
