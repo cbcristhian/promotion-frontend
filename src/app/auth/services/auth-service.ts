@@ -51,7 +51,7 @@ export class AuthService {
       return of(false);
     }
 
-    return this.http.get<AuthResponse>(`${baseUrl}/auth/check-status`).pipe(
+    return this.http.get<AuthResponse>(`${baseUrl}/check-status`).pipe(
       map((resp) => this.handleAuthSuccess(resp)),
       catchError((error) => this.handleAuthError(error)),
     );
