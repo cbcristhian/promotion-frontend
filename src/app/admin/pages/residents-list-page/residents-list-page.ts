@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AdminService } from '../../services/admin-service';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { BooleanIconPipe } from '../../../shared/pipes/boolean-icon-pipe';
 
 @Component({
   selector: 'app-residents-list-page',
-  imports: [RouterLink],
+  imports: [RouterLink, BooleanIconPipe],
   templateUrl: './residents-list-page.html',
   styleUrl: './residents-list-page.scss',
 })

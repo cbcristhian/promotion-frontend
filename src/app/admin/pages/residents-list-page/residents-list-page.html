@@ -17,6 +17,7 @@
           <th>Name</th>
           <th>Email</th>
           <th>Apartment Number</th>
+          <th>Ready for raffle</th>
           <th class="text-right">Actions</th>
         </tr>
       </thead>
@@ -27,6 +28,9 @@
             <td>{{ resident.name }}</td>
             <td>{{ resident.email }}</td>
             <td>{{ resident.apartmentNumber }}</td>
+            <td>
+              <i [class]="resident.registeredForCurrentRaffle | booleanIcon"></i>
+            </td>
             <td class="text-right space-x-2">
               <a
                 class="btn btn-sm btn-outline"
