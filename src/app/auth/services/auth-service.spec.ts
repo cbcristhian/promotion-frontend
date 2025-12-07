@@ -111,7 +111,7 @@ describe('AuthService', () => {
 
     service.checkStatus().subscribe((res) => (result = res));
 
-    const req = httpMock.expectOne(`${baseUrl}/auth/check-status`);
+    const req = httpMock.expectOne(`${baseUrl}/check-status`);
     expect(req.request.method).toBe('GET');
     req.flush(mockAuthResponse);
 
