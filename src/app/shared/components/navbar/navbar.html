@@ -23,7 +23,7 @@
     <ul class="menu menu-horizontal px-1">
       @if (authService.isAdmin()) {
         <li><a class="btn btn-ghost" routerLinkActive="text-secondary">Raffle</a></li>
-        <li><a class="btn btn-ghost" routerLinkActive="text-secondary">Residents</a></li>
+        <li><a class="btn btn-ghost" routerLink="/admin/resident-list" routerLinkActive="text-secondary">Residents</a></li>
       }
       @else if (authService.isResident()) {
         <li><a class="btn btn-ghost" routerLinkActive="text-secondary">History</a></li>

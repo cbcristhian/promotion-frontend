@@ -1,0 +1,52 @@
+<div class="mb-6 text-center">
+  <h1 class="text-2xl font-bold">Residents</h1>
+</div>
+<button class="btn btn-secondary">Add resident</button>
+
+@if (residentsResource.value()?.count === 0) {
+  <div class="alert alert-info">
+    No residents registered yet
+  </div>
+} @else {
+  <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mt-2">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Apartment Number</th>
+          <th>Ready for raffle</th>
+          <th class="text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (resident of residentsResource.value()?.residents; track $index) {
+          <tr>
+            <th>{{$index +1}}</th>
+            <td>{{ resident.name }}</td>
+            <td>{{ resident.email }}</td>
+            <td>{{ resident.apartmentNumber }}</td>
+            <td>
+              <i [class]="resident.registeredForCurrentRaffle | booleanIcon"></i>
+            </td>
+            <td class="text-right space-x-2">
+              <a
+                class="btn btn-sm btn-outline"
+                [routerLink]="[resident.id, 'edit']">
+                Edit
+              </a>
+
+              <button
+                class="btn btn-sm btn-error btn-outline"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
