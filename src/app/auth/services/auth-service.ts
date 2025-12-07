@@ -31,9 +31,8 @@ export class AuthService {
   user = computed(() => this._user());
   token = computed(() => this._token());
 
-  role = computed(() => this._user()?.role ?? null);
-  isAdmin = computed(() => this.role() === 'ADMIN');
-  isResident = computed(() => this.role() === 'RESIDENT');
+  isAdmin = computed(() => this._user()?.role === 'ADMIN');
+  isResident = computed(() => this.user()?.role === 'RESIDENT');
 
   login(email: string, password: string): Observable<boolean> {
     return this.http
