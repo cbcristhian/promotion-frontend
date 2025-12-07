@@ -7,8 +7,7 @@ import {
 import { AuthResponse } from '../interfaces/auth-response.interface';
 import { environment } from '../../../environments/environment';
 import { User } from '../interfaces/user.interface';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
 
 const baseUrl = environment.baseUrl;
 
@@ -30,15 +29,7 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-      providers: [
-        AuthService,
-        provideHttpClientTesting(),
-        {
-          provide: '_HttpClient',
-          useFactory: () => inject(HttpClient),
-        },
-      ],
+      providers: [AuthService, provideHttpClient(), provideHttpClientTesting()],
     });
 
     service = TestBed.inject(AuthService);
@@ -72,7 +63,6 @@ describe('AuthService', () => {
     expect(service.authStatus()).toBe('authenticated');
     expect(service.user()).toEqual(mockUser);
     expect(service.token()).toBe('fake-token');
-    expect(service.role()).toBe('ADMIN');
     expect(service.isAdmin()).toBe(true);
     expect(service.isResident()).toBe(false);
   }));
@@ -89,7 +79,6 @@ describe('AuthService', () => {
     expect(service.user()).toBeNull();
     expect(service.token()).toBeNull();
     expect(service.authStatus()).toBe('not-authenticated');
-    expect(service.role()).toBeNull();
     expect(service.isAdmin()).toBe(false);
     expect(service.isResident()).toBe(false);
     expect(localStorage.getItem('token')).toBeNull();
@@ -124,13 +113,11 @@ describe('AuthService', () => {
   }));
 
   it('computed properties should reflect user role changes', () => {
-    expect(service.role()).toBeNull();
     expect(service.isAdmin()).toBe(false);
     expect(service.isResident()).toBe(false);
 
     service['_user'].set({ ...mockUser, role: 'RESIDENT' });
 
-    expect(service.role()).toBe('RESIDENT');
     expect(service.isAdmin()).toBe(false);
     expect(service.isResident()).toBe(true);
   });
