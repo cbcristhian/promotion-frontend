@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { AdminService } from '../../services/admin-service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { BooleanIconPipe } from '../../../shared/pipes/boolean-icon-pipe';
+import { Resident } from '../../interfaces/resident-response.interface';
 
 @Component({
   selector: 'app-residents-list-page',
@@ -12,6 +13,7 @@ import { BooleanIconPipe } from '../../../shared/pipes/boolean-icon-pipe';
 })
 export class ResidentsListPage {
   private adminService = inject(AdminService);
+  private router = inject(Router);
 
   residentsResource = rxResource({
     params: () => ({}),
@@ -19,4 +21,10 @@ export class ResidentsListPage {
       return this.adminService.getResidents();
     },
   });
+
+  editResident(resident: Resident) {
+    this.router.navigate(['/admin/resident-edit', resident.id], {
+      state: { resident },
+    });
+  }
 }

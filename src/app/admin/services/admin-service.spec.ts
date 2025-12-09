@@ -46,7 +46,7 @@ describe('AdminService', () => {
         name: 'John Doe',
         email: 'john@example.com',
         role: 'RESIDENT',
-        apartmentNumber: 'A101',
+        apartmentNumber: 101,
         registeredForCurrentRaffle: true,
         assignmentHistoryIds: ['raffle-1'],
       },
@@ -55,7 +55,7 @@ describe('AdminService', () => {
         name: 'Jane Doe',
         email: 'jane@example.com',
         role: 'RESIDENT',
-        apartmentNumber: 'B202',
+        apartmentNumber: 202,
         registeredForCurrentRaffle: false,
         assignmentHistoryIds: [],
       },
@@ -69,7 +69,7 @@ describe('AdminService', () => {
     service.getResidents().subscribe((response) => {
       expect(response.count).toBe(2);
       expect(response.residents.length).toBe(2);
-      expect(response.residents[0].apartmentNumber).toBe('A101');
+      expect(response.residents[0].apartmentNumber).toBe(101);
     });
 
     const req = httpMock.expectOne(`${baseUrl}/get-residents`);

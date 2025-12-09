@@ -1,0 +1,71 @@
+<div class="max-w-2xl mx-auto p-4">
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title text-xl md:text-2xl">
+        Resident Details
+      </h2>
+      <p class="text-sm text-base-content/70">
+       {{ isEdit() ? 'Update' : 'Register' }} resident information
+      </p>
+
+      <form class="mt-6 space-y-4" [formGroup]="residentForm" (ngSubmit)="onSubmit()">
+        <!-- Name -->
+        <div class="form-control w-full">
+          <label class="label" for="name">
+            <span class="label-text">Name</span>
+          </label>
+          <input
+            type="text"
+            class="input input-bordered w-full"
+            formControlName="name"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="form-control w-full">
+          <label class="label" for="email">
+            <span class="label-text">Email</span>
+          </label>
+          <input
+            type="email"
+            class="input input-bordered w-full"
+            formControlName="email"          />
+        </div>
+
+        @if (!isEdit()) {
+          <!-- Temporary Password -->
+          <div class="form-control w-full">
+            <label class="label" for="password">
+              <span class="label-text">Temporary Password</span>
+            </label>
+            <input
+              type="password"
+              class="input input-bordered w-full"
+              formControlName="password"
+            />
+          </div>
+        }
+
+        <!-- Apartment -->
+        <div class="form-control w-full">
+          <label class="label" for="apartmentNumber">
+            <span class="label-text">Apartment Number</span>
+          </label>
+          <input
+            type="text"
+            placeholder="0"
+            class="input input-bordered ml-2"
+            formControlName="apartmentNumber"
+          />
+        </div>
+
+        <!-- Actions -->
+        <div class="card-actions justify-end pt-6">
+          <button type="submit" class="btn btn-primary">
+            {{ isEdit() ? 'Update Resident' : 'Register Resident' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
