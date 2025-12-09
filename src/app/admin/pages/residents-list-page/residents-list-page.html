@@ -1,7 +1,7 @@
 <div class="mb-6 text-center">
   <h1 class="text-2xl font-bold">Residents</h1>
 </div>
-<button class="btn btn-secondary">Add resident</button>
+<button routerLink="/admin/resident-create" class="btn btn-secondary">Add resident</button>
 
 @if (residentsResource.value()?.count === 0) {
   <div class="alert alert-info">
@@ -32,11 +32,11 @@
               <i [class]="resident.registeredForCurrentRaffle | booleanIcon"></i>
             </td>
             <td class="text-right space-x-2">
-              <a
+              <button
                 class="btn btn-sm btn-outline"
-                [routerLink]="[resident.id, 'edit']">
+                (click)="editResident(resident)">
                 Edit
-              </a>
+              </button>
 
               <button
                 class="btn btn-sm btn-error btn-outline"

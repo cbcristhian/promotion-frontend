@@ -33,7 +33,7 @@ export class LoginPage {
     const { email = '', password = '' } = this.loginForm.value;
     this.authService.login(email!, password!).subscribe((isAuthenticated) => {
       if (isAuthenticated) {
-        this.router.navigateByUrl('/');
+        if (this.authService.isAdmin()) this.router.navigateByUrl('/admin');
         return;
       }
     });

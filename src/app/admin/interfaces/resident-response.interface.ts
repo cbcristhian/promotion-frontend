@@ -5,12 +5,17 @@ export interface ResidentsResponse {
   residents: Resident[];
 }
 
+export interface ResidentCreatedResponse {
+  message: string;
+  resident: Resident;
+}
+
 export interface Resident extends User {
-  apartmentNumber: string;
+  apartmentNumber: number;
 
   // raffle-related
   registeredForCurrentRaffle: boolean;
 
   // history references
-  assignmentHistoryIds: string[];
+  assignmentHistoryIds?: string[];
 }
