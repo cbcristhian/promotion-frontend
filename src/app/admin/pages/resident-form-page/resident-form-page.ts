@@ -25,7 +25,7 @@ export class ResidentFormPage {
   private adminService = inject(AdminService);
   private fb = inject(FormBuilder);
 
-  formUtils=FormUtils
+  formUtils = FormUtils;
 
   id = signal<string | null>(this.route.snapshot.paramMap.get('id'));
 
@@ -40,7 +40,10 @@ export class ResidentFormPage {
   );
 
   residentForm = this.fb.nonNullable.group({
-    email: ['', [Validators.required, Validators.pattern(FormUtils.emailPattern)]],
+    email: [
+      '',
+      [Validators.required, Validators.pattern(FormUtils.emailPattern)],
+    ],
     password: [''],
     name: ['', [Validators.required, Validators.minLength(3)]],
     apartmentNumber: [0, Validators.required],
@@ -90,7 +93,7 @@ export class ResidentFormPage {
   }
 
   onSubmit() {
-    this.residentForm.markAllAsTouched()
+    this.residentForm.markAllAsTouched();
     if (this.residentForm.invalid || this.isSubmitting()) return;
 
     this.isSubmitting.set(true);
@@ -118,7 +121,7 @@ export class ResidentFormPage {
         Swal.fire({ title: res.message, icon: 'success' });
         this.router.navigateByUrl('/admin/resident-list');
       },
-      error: (error:HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.isSubmitting.set(false);
         Swal.fire({ title: error.error.message, icon: 'error' });
       },

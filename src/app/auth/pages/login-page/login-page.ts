@@ -14,12 +14,15 @@ export class LoginPage {
   formBuilder = inject(FormBuilder);
   authService = inject(AuthService);
   router = inject(Router);
-  formUtils=FormUtils
+  formUtils = FormUtils;
 
   hasError = signal(false);
 
   loginForm = this.formBuilder.group({
-    email: ['', [Validators.required,Validators.pattern(FormUtils.emailPattern)]],
+    email: [
+      '',
+      [Validators.required, Validators.pattern(FormUtils.emailPattern)],
+    ],
     password: ['', [Validators.required, Validators.minLength(3)]],
   });
 
@@ -30,15 +33,15 @@ export class LoginPage {
     }
     const { email = '', password = '' } = this.loginForm.value;
     this.authService.login(email!, password!).subscribe({
-      next:(isAuthenticated) => {
+      next: (isAuthenticated) => {
         if (isAuthenticated) {
           if (this.authService.isAdmin()) this.router.navigateByUrl('/admin');
           return;
-        }else{
-          this.hasError.set(true)
+        } else {
+          this.hasError.set(true);
           setTimeout(() => this.hasError.set(false), 2500);
         }
       },
-    })
+    });
   }
 }
