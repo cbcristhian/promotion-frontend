@@ -19,6 +19,11 @@
             class="input input-bordered w-full"
             formControlName="name"
           />
+          @if (formUtils.isValidField(residentForm,'name')) {
+            <span class="text-error text-sm">
+              {{formUtils.getFieldError(residentForm,'name')}}
+            </span>
+          }
         </div>
 
         <!-- Email -->
@@ -30,6 +35,11 @@
             type="email"
             class="input input-bordered w-full"
             formControlName="email"          />
+            @if (formUtils.isValidField(residentForm,'email')) {
+              <span class="text-error text-sm">
+                {{formUtils.getFieldError(residentForm,'email')}}
+              </span>
+            }
         </div>
 
         @if (!isEdit()) {
@@ -43,6 +53,11 @@
               class="input input-bordered w-full"
               formControlName="password"
             />
+            @if (formUtils.isValidField(residentForm,'password')) {
+              <span class="text-error text-sm">
+                {{formUtils.getFieldError(residentForm,'password')}}
+              </span>
+            }
           </div>
         }
 
@@ -57,11 +72,16 @@
             class="input input-bordered ml-2"
             formControlName="apartmentNumber"
           />
+          @if (formUtils.isValidField(residentForm,'apartmentNumber')) {
+            <span class="text-error text-sm">
+              {{formUtils.getFieldError(residentForm,'apartmentNumber')}}
+            </span>
+          }
         </div>
 
         <!-- Actions -->
         <div class="card-actions justify-end pt-6">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary" [disabled]="residentForm.invalid">
             {{ isEdit() ? 'Update Resident' : 'Register Resident' }}
           </button>
         </div>
