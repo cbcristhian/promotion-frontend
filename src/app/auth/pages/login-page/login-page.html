@@ -14,6 +14,11 @@
     </svg>
     <input type="email" placeholder="Email" required formControlName="email" />
   </label>
+    @if (formUtils.isValidField(loginForm,'email')) {
+      <span class="text-error text-sm">
+        {{formUtils.getFieldError(loginForm,'email')}}
+      </span>
+    }
   <label class="input validator">
     <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <g
@@ -36,14 +41,14 @@
       formControlName="password"
     />
   </label>
-  <button class="btn btn-secondary">
+    @if (formUtils.isValidField(loginForm,'password')) {
+      <span class="text-error text-sm">
+        {{formUtils.getFieldError(loginForm,'password')}}
+      </span>
+    }
+  <button class="btn btn-secondary" [class.opacity-50]="loginForm.invalid">
     Login
   </button>
-
-  <p class="text-slate-700">
-    Dont have an account?
-    <a routerLink="/auth/register" class="text-accent">Create one here</a>
-  </p>
 </form>
 
 @if (hasError()) {

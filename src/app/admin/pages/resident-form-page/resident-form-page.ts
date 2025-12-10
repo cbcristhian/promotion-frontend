@@ -9,6 +9,8 @@ import {
   ResidentCreatedResponse,
 } from '../../interfaces/resident-response.interface';
 import { take } from 'rxjs';
+import { FormUtils } from '../../../shared/utils/form-util';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-resident-form-page',
@@ -23,6 +25,8 @@ export class ResidentFormPage {
   private adminService = inject(AdminService);
   private fb = inject(FormBuilder);
 
+  formUtils=FormUtils
+
   id = signal<string | null>(this.route.snapshot.paramMap.get('id'));
 
   isEdit = computed(() => !!this.id());
@@ -36,7 +40,7 @@ export class ResidentFormPage {
   );
 
   residentForm = this.fb.nonNullable.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.pattern(FormUtils.emailPattern)]],
     password: [''],
     name: ['', [Validators.required, Validators.minLength(3)]],
     apartmentNumber: [0, Validators.required],
@@ -86,6 +90,7 @@ export class ResidentFormPage {
   }
 
   onSubmit() {
+    this.residentForm.markAllAsTouched()
     if (this.residentForm.invalid || this.isSubmitting()) return;
 
     this.isSubmitting.set(true);
@@ -113,9 +118,9 @@ export class ResidentFormPage {
         Swal.fire({ title: res.message, icon: 'success' });
         this.router.navigateByUrl('/admin/resident-list');
       },
-      error: () => {
+      error: (error:HttpErrorResponse) => {
         this.isSubmitting.set(false);
-        Swal.fire({ title: 'Something went wrong', icon: 'error' });
+        Swal.fire({ title: error.error.message, icon: 'error' });
       },
     });
   }
