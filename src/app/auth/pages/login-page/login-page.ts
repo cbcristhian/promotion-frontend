@@ -36,6 +36,8 @@ export class LoginPage {
       next: (isAuthenticated) => {
         if (isAuthenticated) {
           if (this.authService.isAdmin()) this.router.navigateByUrl('/admin');
+          if (this.authService.isResident())
+            this.router.navigateByUrl('/resident');
           return;
         } else {
           this.hasError.set(true);

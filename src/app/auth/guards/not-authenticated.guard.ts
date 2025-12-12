@@ -14,6 +14,9 @@ export const NotAuthenticatedGuard: CanMatchFn = async () => {
     if (authService.isAdmin()) {
       router.navigateByUrl('/admin');
       return false;
+    } else if (authService.isResident()) {
+      router.navigateByUrl('/resident');
+      return false;
     }
   }
 
