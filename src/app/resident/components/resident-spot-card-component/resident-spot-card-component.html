@@ -1,0 +1,28 @@
+<div class=" border p-4 rounded-xl bg-base-200 mt-3">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+
+    <!-- Latest Assignment -->
+    <div>
+      <p class="opacity-60 text-sm">{{spotLabel()}}</p>
+
+      @if (history().parkingSpotId) {
+        <span class="badge badge-primary badge-lg">
+          Spot {{ history().parkingSpotId }}
+        </span>
+      } @else {
+        <span class="badge badge-error badge-lg">
+          No Spot Assigned
+        </span>
+      }
+    </div>
+
+    <!-- Timestamp -->
+    <div>
+      <p class="opacity-60 text-sm">{{dateLabel()}}</p>
+      <p class="font-medium">
+        {{ history().executedAt | date:'medium' }}
+      </p>
+    </div>
+
+  </div>
+</div>
