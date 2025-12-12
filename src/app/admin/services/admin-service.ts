@@ -10,6 +10,7 @@ import {
   ResidentCreatedResponse,
   ResidentsResponse,
 } from '../interfaces/resident-response.interface';
+import { RaffleResult } from '../interfaces/raffle-result.interface';
 
 const baseUrl = environment.baseUrl;
 
@@ -40,5 +41,13 @@ export class AdminService {
       `${baseUrl}/resident/${id}`,
       resident,
     );
+  }
+
+  runRaffle(): Observable<RaffleResult> {
+    return this.http.post<RaffleResult>(`${baseUrl}/raffle`, {});
+  }
+
+  getLatestRaffle(): Observable<RaffleResult> {
+    return this.http.get<RaffleResult>(`${baseUrl}/latest-raffle`);
   }
 }
