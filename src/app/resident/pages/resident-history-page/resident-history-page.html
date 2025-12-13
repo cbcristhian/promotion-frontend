@@ -1,13 +1,16 @@
 <div class="max-w-3xl mx-auto p-4 space-y-6">
+  <button   class="btn"
+  [class.btn-secondary]="!isCurrentlyRegisteredForRaffle()"
+  [class.btn-warning]="isCurrentlyRegisteredForRaffle()" onclick="register_raffle_modal.showModal()">{{buttonLabel()}}</button>
   <div class="card bg-base-100 shadow">
     <div class="card-body space-y-2">
       <h2 class="card-title text-xl">Your Current Parking Assignment</h2>
 
-      @if (historyResource.value()?.length) {
-        @let latest = historyResource.value()?.[0]!;
+      @if (historyResource.value()?.residentHistory?.length) {
+        @let latest = historyResource.value()?.residentHistory?.[0]!;
         <app-resident-spot-card-component [history]="latest"></app-resident-spot-card-component>
       } @else {
-        <p class="opacity-70 text-sm">No raffle history found.</p>
+        <p class="opacity-70 text-sm">No current parking assignment.</p>
       }
     </div>
   </div>
@@ -18,10 +21,9 @@
       <p class="opacity-60 text-sm">Every raffle you participated in.</p>
       <div class="divider"></div>
       @if (historyResource.value()) {
-
         <div class="space-y-4">
 
-          @for (r of historyResource.value(); track r.executedAt) {
+          @for (r of historyResource.value()?.residentHistory; track r.executedAt) {
             <app-resident-spot-card-component [history]="r" [isLatest]="false"></app-resident-spot-card-component>
           }
 
@@ -34,3 +36,15 @@
 
 </div>
 
+<dialog id="register_raffle_modal" class="modal">
+  <app-resident-register-raffle-modal (registered)="closeModal($event)" [isRegistered]="isCurrentlyRegisteredForRaffle()"></app-resident-register-raffle-modal>
+</dialog>
+
+@if (hasRegistered()) {
+  <div role="alert" class="alert alert-success animate-fadeIn fixed bottom-5 right-5 w-52">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>{{registerMessage()}}</span>
+  </div>
+}

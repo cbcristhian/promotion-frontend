@@ -1,3 +1,8 @@
+export interface ResidentHistoryResult {
+  registeredForRaffle: boolean;
+  residentHistory: ResidentHistory[];
+}
+
 export interface ResidentHistory {
   executedAt: string;
   residentId: string;

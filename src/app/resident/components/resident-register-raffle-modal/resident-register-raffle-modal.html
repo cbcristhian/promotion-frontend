@@ -1,0 +1,37 @@
+{{isRegistered()}}
+<div class="modal-box">
+  <h3 class="text-lg font-bold">
+    {{ isRegistered()
+      ? 'Unregister from Parking Raffle'
+      : 'Register for Parking Raffle' }}
+  </h3>
+
+  <p class="py-4">
+    @if (isRegistered()) {
+      You are currently registered for the parking raffle.
+      If you unregister, <strong>you will not participate in the next raffle</strong>.
+      <small class="text-sm text-gray-500">
+        You can register again before the raffle is executed.
+      </small>
+    } @else {
+      By registering, you will be included in the
+      <strong>next parking spot raffle</strong>.
+    }
+  </p>
+
+  <button
+    class="btn"
+    [class.btn-secondary]="!isRegistered()"
+    [class.btn-warning]="isRegistered()"
+    (click)="register()">
+    {{ isRegistered()
+      ? 'Confirm Unregistration'
+      : 'Confirm Registration' }}
+  </button>
+
+  <div class="modal-action">
+    <form method="dialog">
+      <button class="btn btn-ghost">Close</button>
+    </form>
+  </div>
+</div>
