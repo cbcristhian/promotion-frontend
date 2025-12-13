@@ -23,8 +23,8 @@
       @if (historyResource.value()) {
         <div class="space-y-4">
 
-          @for (r of historyResource.value()?.residentHistory; track r.executedAt) {
-            <app-resident-spot-card-component [history]="r" [isLatest]="false"></app-resident-spot-card-component>
+          @for (history of historyResource.value()?.residentHistory; track history.executedAt) {
+            <app-resident-spot-card-component [history]="history" [isLatest]="false"></app-resident-spot-card-component>
           }
 
         </div>
