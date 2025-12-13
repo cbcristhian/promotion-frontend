@@ -3,11 +3,10 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { ResidentService } from '../../services/resident-service';
 import { ResidentSpotCardComponent } from '../../components/resident-spot-card-component/resident-spot-card-component';
 import { ResidentRegisterRaffleModal } from '../../components/resident-register-raffle-modal/resident-register-raffle-modal';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-resident-history-page',
-  imports: [ResidentSpotCardComponent, ResidentRegisterRaffleModal, JsonPipe],
+  imports: [ResidentSpotCardComponent, ResidentRegisterRaffleModal],
   templateUrl: './resident-history-page.html',
   styleUrl: './resident-history-page.scss',
 })
