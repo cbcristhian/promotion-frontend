@@ -4,8 +4,9 @@ import {
   provideHttpClientTesting,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { environment } from '../../../environments/environment';
 import { provideHttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { ResidentHistoryResult } from '../interfaces/resident-history.interface';
 
 describe('ResidentService', () => {
   let service: ResidentService;
@@ -32,32 +33,36 @@ describe('ResidentService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should retrieve resident history', () => {
-    const mockHistory = [
-      {
-        executedAt: '2025-12-12T18:11:13.345Z',
-        residentId: '03af2112-66d9-405f-87c1-3c4cc03305fb',
-        name: 'residente2',
-        apartmentNumber: 2,
-        parkingSpotId: 'P2',
-      },
-      {
-        executedAt: '2024-01-01T10:00:00.000Z',
-        residentId: '03af2112-66d9-405f-87c1-3c4cc03305fb',
-        name: 'residente2',
-        apartmentNumber: 2,
-        parkingSpotId: 'P1',
-      },
-    ];
+  it('should retrieve resident history result', () => {
+    const mockResponse: ResidentHistoryResult = {
+      registeredForRaffle: true,
+      residentHistory: [
+        {
+          executedAt: '2025-12-12T18:11:13.345Z',
+          residentId: '03af2112-66d9-405f-87c1-3c4cc03305fb',
+          name: 'residente2',
+          apartmentNumber: 2,
+          parkingSpotId: 'P2',
+        },
+        {
+          executedAt: '2024-01-01T10:00:00.000Z',
+          residentId: '03af2112-66d9-405f-87c1-3c4cc03305fb',
+          name: 'residente2',
+          apartmentNumber: 2,
+          parkingSpotId: 'P1',
+        },
+      ],
+    };
 
     service.getResidentHistory().subscribe((res) => {
-      expect(res.length).toBe(2);
-      expect(res).toEqual(mockHistory);
+      expect(res.registeredForRaffle).toBeTrue();
+      expect(res.residentHistory.length).toBe(2);
+      expect(res.residentHistory).toEqual(mockResponse.residentHistory);
     });
 
     const req = httpMock.expectOne(`${environment.baseUrl}/resident-history`);
     expect(req.request.method).toBe('GET');
 
-    req.flush(mockHistory);
+    req.flush(mockResponse);
   });
 });
