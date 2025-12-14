@@ -19,3 +19,8 @@ export interface Resident extends User {
   // history references
   assignmentHistoryIds?: string[];
 }
+
+export interface ResidentDeletedResponse {
+  message: string;
+  user: User;
+}

@@ -17,6 +17,7 @@ export class LoginPage {
   formUtils = FormUtils;
 
   hasError = signal(false);
+  isRunning = signal(false);
 
   loginForm = this.formBuilder.group({
     email: [
@@ -31,16 +32,19 @@ export class LoginPage {
       this.loginForm.markAllAsTouched();
       return;
     }
+    this.isRunning.set(true);
     const { email = '', password = '' } = this.loginForm.value;
     this.authService.login(email!, password!).subscribe({
       next: (isAuthenticated) => {
         if (isAuthenticated) {
+          this.isRunning.set(false);
           if (this.authService.isAdmin()) this.router.navigateByUrl('/admin');
           if (this.authService.isResident())
             this.router.navigateByUrl('/resident');
           return;
         } else {
           this.hasError.set(true);
+          this.isRunning.set(false);
           setTimeout(() => this.hasError.set(false), 2500);
         }
       },

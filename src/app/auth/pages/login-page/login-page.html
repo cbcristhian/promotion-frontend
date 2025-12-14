@@ -47,7 +47,12 @@
       </span>
     }
   <button class="btn btn-secondary" [class.opacity-50]="loginForm.invalid">
-    Login
+    @if (isRunning()) {
+      <span class="loading loading-spinner loading-sm"></span>
+      Running...
+    } @else {
+      Run Raffle
+    }
   </button>
 </form>
 
