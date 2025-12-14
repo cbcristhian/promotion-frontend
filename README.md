@@ -1,59 +1,135 @@
-# PromotionFrontend
+# Parking Lot Allocation System  
+**Angular I3 – Promotion Assessment**
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.1.
+This project is an Angular 20 standalone-components application that implements a **Parking Lot Allocation System** for a small residential building.
 
-## Development server
+When the number of available parking spots is less than the number of residents requesting one, a **raffle system** is used to assign spots fairly.  
+The raffle runs once every three months and can be manually triggered by an admin.
 
-To start a local development server, run:
+---
+
+## Project Overview
+
+### Core Concepts
+- **Role-based access** (Admin / Resident)
+- **Standalone Components**
+- **Signals & RxResource**
+- **Lazy-loaded feature routes**
+- **In-memory backend (Node.js)**
+- **TailwindCSS + DaisyUI**
+- **Clean separation of concerns**
+
+---
+
+## Features
+
+### Admin
+- Register, edit, and delete residents
+- Manually trigger the parking raffle
+- View the latest raffle results
+
+### Resident
+- Register for the upcoming raffle
+- View current parking assignment
+- View full parking assignment history
+
+---
+## Architecture & Design Decisions
+
+This project follows a **feature-based folder structure**, where each core module contains its own documentation.
+
+- **Auth Module**  
+  Handles authentication, authorization, guards, and session restoration.  
+  → [Read auth.md](src/app/auth/auth.md)
+
+- **Admin Module**  
+  Resident management and raffle execution logic.  
+  → [Read admin.md](src/app/admin/admin.md)
+
+-  **Resident Module**  
+  Raffle participation and parking history.  
+  → [Read resident.md](src/app/resident/resident.md)
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- **Angular 20**
+- **Standalone Components**
+- **Signals**
+- **RxResource**
+- **TailwindCSS**
+- **DaisyUI**
+- **RxJS 7.8**
+
+### Backend
+- **Node.js (in-memory data)**
+https://github.com/cbcristhian/promotion-backend
+- **JWT authentication**
+- No database
+---
+
+
+## Getting Started (Local Development)
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- **Node.js:** `v22.17.1`
+- **npm:** `v10.9.2`
+
+You can verify with:
 
 ```bash
+node -v
+npm -v
+```
+Clone the repository
+```
+git clone <your-repository-url>
+cd <repository-folder>
+```
+Install Dependencies and run
+```
+npm i
 ng serve
 ```
+## Test Credentials & Limitations
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Admin Test Account
 
-## Code scaffolding
+For review purposes, the application currently includes **one predefined admin user** to test the full admin flow:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Email:** `cris@email.com`
+- **Password:** `123`
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+### Parking Spot Limitations
 
-## Building
+- The number of available parking spots is **fixed and limited**
+- There is **no UI flow** to create or manage parking spots
+- Parking spots are defined directly in the **backend in-memory data**
 
-To build the project run:
+To change the number of parking spots:
 
-```bash
-ng build
-```
+1. Update the backend in-memory configuration
+2. Restart or redeploy the backend server
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This limitation is **intentional** and aligned with the scope of the technical assessment.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### In-Memory Backend Note
 
-```bash
-ng test
-```
+- All data (**users, raffle history, parking spots**) is stored **in memory**
+- Restarting the backend **resets all data**
+- No database is used **by design**
 
-## Running end-to-end tests
+This approach keeps the focus on:
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Frontend architecture
+- State management
+- Business logic clarity
