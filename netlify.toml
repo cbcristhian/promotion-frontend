@@ -1,3 +1,7 @@
+[build]
+  command = "npm run build -- --configuration production"
+  publish = "dist/promotion-frontend/browser"
+
 [[redirects]]
   from = "/*"
   status = 200
