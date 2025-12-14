@@ -11,6 +11,7 @@ import {
   ResidentsResponse,
 } from '../interfaces/resident-response.interface';
 import { RaffleResult } from '../interfaces/raffle-result.interface';
+import { ResidentDeletedResponse } from '../interfaces/resident-response.interface';
 
 const baseUrl = environment.baseUrl;
 
@@ -49,5 +50,11 @@ export class AdminService {
 
   getLatestRaffle(): Observable<RaffleResult> {
     return this.http.get<RaffleResult>(`${baseUrl}/latest-raffle`);
+  }
+
+  deleteResident(id: string): Observable<ResidentDeletedResponse> {
+    return this.http.delete<ResidentDeletedResponse>(
+      `${baseUrl}/resident/${id}`,
+    );
   }
 }
