@@ -171,7 +171,7 @@ The project is deployed automatically to **Netlify** whenever changes are merged
 3. The Angular app is built using `npm run build`
 4. The generated `dist/` folder is deployed to Netlify
 
-> File: `.github/workflows/deploy-netlify.yml`
+> File: `.github/workflows/deploy.yml`
 
 ---
 
