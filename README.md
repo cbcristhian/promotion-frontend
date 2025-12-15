@@ -104,7 +104,6 @@ For review purposes, the application currently includes **one predefined admin u
 - **Email:** `cris@email.com`
 - **Password:** `123`
 
-
 ---
 
 ### Parking Spot Limitations
@@ -133,3 +132,50 @@ This approach keeps the focus on:
 - Frontend architecture
 - State management
 - Business logic clarity
+
+---
+
+##  Deployment & CI/CD
+
+This project includes a simple but effective **CI/CD setup** using **GitHub Actions** and **Netlify**, designed to ensure code quality while keeping the deployment process lightweight and free-tier friendly.
+
+---
+
+## GitHub Actions
+
+### PR Validation Workflow
+
+A **Pull Request validation workflow** is configured to run automatically on every PR targeting the main branch.
+
+**Purpose:**
+- Catch compilation and linting errors early
+- Run tests
+- Prevent broken code from being merged
+
+This workflow helps maintain stability and confidence when reviewing changes.
+
+> File: `.github/workflows/pr-validation.yml`
+
+---
+
+### Deployment Workflow (Netlify)
+
+The project is deployed automatically to **Netlify** whenever changes are merged into the main branch.
+
+**Why Netlify:**
+- Free hosting for static Angular applications
+
+**Deployment flow:**
+1. Code is pushed or merged into `master`
+2. GitHub Actions runs the deployment workflow
+3. The Angular app is built using `npm run build`
+4. The generated `dist/` folder is deployed to Netlify
+
+> File: `.github/workflows/deploy.yml`
+
+---
+
+## Live Application
+
+🔗 **Deployed URL:**  
+`https://promotion-frontend.netlify.app`

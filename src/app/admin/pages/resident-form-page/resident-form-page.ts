@@ -46,7 +46,7 @@ export class ResidentFormPage {
     ],
     password: [''],
     name: ['', [Validators.required, Validators.minLength(3)]],
-    apartmentNumber: [0, Validators.required],
+    apartmentNumber: [0, [Validators.required, Validators.min(1)]],
   });
 
   isSubmitting = signal(false);
